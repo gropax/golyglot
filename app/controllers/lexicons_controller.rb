@@ -9,7 +9,7 @@ class LexiconsController < ApplicationController
   end
 
   def show
-    redirect_to lexicon_sentences_path(@lexicon)
+    redirect_to lexicon_lexical_entries_path(@lexicon)
   end
 
   def new
@@ -18,7 +18,6 @@ class LexiconsController < ApplicationController
 
   def create
     @lexicon = Lexicon.new(lexicon_params)
-    binding.pry
     if @lexicon.save
       flash[:success] = "Lexicon \"#{@lexicon.name}\" successfuly created."
       redirect_to lexical_resource_lexicons_path(@user)

@@ -3,10 +3,10 @@
     <%= content_tag :li, role: 'presentation', class: (nav.lexicons? && 'active') do %>
       <%= link_to "Lexicons", lexical_resource_lexicons_path(@lexical_resource) %>
     <% end %>
-    <%= content_tag :li, role: 'presentation', class: (nav.sense_axis? && 'active') do %>
+    <%= content_tag :li, role: 'presentation', class: 'disabled' do %>
       <%= link_to "Sense Axis", lexical_resource_sense_axis_path(@lexical_resource) %>
     <% end %>
-    <%= content_tag :li, role: 'presentation', class: (nav.sentence_axis? && 'active') do %>
+    <%= content_tag :li, role: 'presentation', class: 'disabled' do %>
       <%= link_to "Sentence Axis", lexical_resource_sentence_axis_path(@lexical_resource) %>
     <% end %>
   </ul>

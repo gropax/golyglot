@@ -1,0 +1,79 @@
+<% content_for :resources_header do %>
+  <div class="col-md-4">
+    <%= link_to lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      Search
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <%= form_tag lexicon_lexical_entries_path(@lexicon), method: :post do %>
+      <div class="input-group">
+        <!-- Representation Selection Button -->
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= @representation %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <%= link_to "Simplified", add_lexicon_lexical_entries_path(@lexicon, repr: 'simplified') %>
+            </li>
+            <li>
+              <%= link_to "Traditional", add_lexicon_lexical_entries_path(@lexicon, repr: 'traditional') %>
+            </li>
+            <li>
+              <%= link_to "Pinyin", add_lexicon_lexical_entries_path(@lexicon, repr: 'pinyin') %>
+            </li>
+          </ul>
+        </span>
+
+        <%= text_field_tag :written_form, nil, class: 'form-control', autofocus: true %>
+        <%= hidden_field_tag :repr, @representation %>
+
+        <!-- Create Button -->
+        <span class="input-group-btn">
+          <%= content_tag :button, type: 'submit', class: 'btn btn-success' do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Create
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= flash_messages %>
+
+<table class="table table-hover">
+  <tr>
+    <th style="width: 0px;">
+      <%= check_box_tag :selected %>
+    </th>
+    <th>Simplified</th>
+    <th>Traditional</th>
+    <th>Pinyin</th>
+  </tr>
+  <% for lexical_entry in @lexical_entries %>
+    <tr>
+      <td style="width: 0px;">
+        <%= check_box_tag :selected %>
+      </td>
+      <td>
+        <%= link_to lexical_entry_path(lexical_entry) do %>
+          <%= lexical_entry.simplified %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to lexical_entry_path(lexical_entry) do %>
+          <%= lexical_entry.traditional %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to lexical_entry_path(lexical_entry) do %>
+          <%= lexical_entry.pinyin %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

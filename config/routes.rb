@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :cmn do
+    resources :lexical_entries
+  end
+  namespace :cmn do
+    resources :lexicons
+  end
   resources :lexicons
   resources :lexical_resources
   root :to => "home#index"
@@ -17,19 +23,26 @@ Rails.application.routes.draw do
 
   resources :lexical_resources, except: [:index, :create, :new] do
     resource :settings, only: [:show, :update]
+
     resources :lexicons, only: [:index, :create, :new]
+
     resources :sense_axis, only: [:index, :create, :new]
     resources :sentence_axis, only: [:index, :create, :new]
   end
 
-  resources :lexicons, except: [:index, :create, :new] do
-    resource :settings
+  namespace :cmn do
+    resources :lexicons, except: [:index, :create, :new] do
+      #resource :settings
 
-    resources :sentences, only: :index do
-      get :search, on: :collection
-      get :add, on: :collection
+      resources :sentences, only: :index do
+        get :search, on: :collection
+        get :add, on: :collection
+      end
+      resources :lexical_entries, only: [:index, :create] do
+        get :search, on: :collection
+        get :add, on: :collection
+      end
     end
-    resources :lexical_entries, only: :index
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

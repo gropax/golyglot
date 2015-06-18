@@ -1,0 +1,39 @@
+<% content_for :form_content do %>
+  <div class="col-md-7">
+    <%= form_tag search_lexicon_sentences_path(@lexicon), method: :get do %>
+      <div class="input-group">
+        <%= text_field_tag :q, nil, class: 'form-control', autofocus: true %>
+        <span class="input-group-btn">
+          <%= content_tag :button, type: 'submit', class: 'btn btn-primary' do %>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            Search
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-2">
+    <%= link_to add_lexicon_sentences_path(@lexicon, lang: @language.code), class: 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Create
+    <% end %>
+  </div>
+<% end %>
+
+<%= flash_messages %>
+
+<table class="table">
+  <% for sentence in @sentences %>
+    <tr>
+      <td style="width: 0px;">
+        <%= check_box_tag :selected %>
+      </td>
+      <td>
+        <%= link_to cmn_sentence_path(sentence) do %>
+          <%= sentence.simplified %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

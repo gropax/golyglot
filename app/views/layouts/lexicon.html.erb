@@ -1,0 +1,71 @@
+<% content_for :content do %>
+  <div class="row">
+    <div class="col-md-10">
+      <h3>
+        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+        <%= link_to @user.name, user_lexical_resources_path(@user) %>
+        <span>/</span>
+        <%= link_to @lexical_resource.name, lexical_resource_lexicons_path(@lexical_resource) %>
+        <span>/</span>
+        <%= link_to @lexicon.name, lexicon_path(@lexicon) %>
+      </h3>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-md-10">
+      <% if content_for? :lexicon_content %>
+        <%= yield :lexicon_content %>
+      <% else %>
+        <%= flash_messages %>
+        <%= yield %>
+      <% end %>
+    </div>
+
+    <div class="col-md-2">
+      <ul class="nav nav-pills nav-stacked">
+        <%= content_tag :li, role: 'presentation', class: (nav.resources? && 'active') do %>
+          <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
+            <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+            Resources
+          <% end %>
+        <% end %>
+        <%= content_tag :li, role: 'presentation', class: 'disabled' do %>
+          <a href="">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Issues
+          </a>
+        <% end %>
+        <%= content_tag :li, role: 'presentation', class: 'disabled' do %>
+          <a href="#">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            Surveys
+          </a>
+        <% end %>
+
+        <hr />
+
+        <%= content_tag :li, role: 'presentation', class: 'disabled' do %>
+          <a href="#">
+            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+            Graphs
+          </a>
+        <% end %>
+
+        <% if current_user == @user %>
+          <%= content_tag :li, role: 'presentation', class: (nav.settings? && 'active') do %>
+            <hr />
+            <%= link_to lexicon_settings_path(@lexicon) do %>
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              Settings
+            <% end %>            
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

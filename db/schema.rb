@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618123837) do
+ActiveRecord::Schema.define(version: 20150618160227) do
+
+  create_table "cmn_lexical_entries", force: :cascade do |t|
+    t.integer  "lexicon_id"
+    t.integer  "type"
+    t.integer  "part_of_speech"
+    t.string   "simplified"
+    t.string   "traditional"
+    t.string   "pinyin"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "cmn_lexical_entries", ["lexicon_id"], name: "index_cmn_lexical_entries_on_lexicon_id"
 
   create_table "lexical_resources", force: :cascade do |t|
     t.string   "name"

@@ -1,0 +1,26 @@
+<% content_for :resources_header do %>
+  <div class="col-md-4">
+    <%= link_to add_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Create
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <%= form_tag search_lexicon_lexical_entries_path(@lexicon), method: :get do %>
+      <div class="input-group">
+        <%= text_field_tag :q, nil, class: 'form-control', autofocus: true %>
+        <span class="input-group-btn">
+          <%= content_tag :button, type: 'submit', class: 'btn btn-primary' do %>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            Search
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= flash_messages %>
+
+<h4>Cmn Lexical Entries Index</h4>

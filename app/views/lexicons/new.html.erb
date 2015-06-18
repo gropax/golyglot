@@ -1,0 +1,7 @@
+<h1>New Lexicon</h1>
+
+<%= bootstrap_form_for @lexicon, as: :lexicon, url: lexical_resource_lexicons_path(@lexical_resource) do |f| %>
+  <%= f.text_field :name, autofocus: true %>
+  <%= f.select :language, [['Mandarin', 'cmn'], ['English', 'eng']] %>
+  <%= f.submit "Create", class: "btn btn-success" %>
+<% end %>

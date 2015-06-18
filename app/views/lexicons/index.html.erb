@@ -1,0 +1,14 @@
+<% content_for :resources_header do %>
+  <% if current_user == @user %>
+    <%= link_to "New Lexicon", new_lexical_resource_lexicon_path(@lexical_resource), class: "btn btn-success", style: "float: right;", role: "button" %>
+  <% end %>
+<% end %>
+  
+<table class="table">
+  <% for lexicon in @lexicons %>
+    <tr>
+      <td><%= link_to lexicon.name, lexicon_path(lexicon) %></td>
+      <td><%= lexicon.language.name %></td>
+    </tr>
+  <% end %>
+</table>

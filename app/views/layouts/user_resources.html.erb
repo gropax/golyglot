@@ -1,0 +1,50 @@
+<% content_for :content do %>
+  <div class="container">
+    <div class="row">
+    
+      <div id="user-info" class="col-md-3">
+        <img src="profile.jpg" alt="" class="img-rounded img-responsive center-block">
+        <h3><%= @user.name %></h3>
+        <h4><%= @user.email %></h4>
+      </div>
+
+      <div id="user-resources" class="col-md-9">
+
+        <ul class="nav nav-tabs">
+          <%= content_tag :li, role: "presentation",
+            class: (nav.lexical_resources? && "active") do %>
+            <%= link_to "Lexical Resources", user_lexical_resources_path(@user) %>
+          <% end %>
+          <li role="presentation" class="disabled">
+            <a href="#">
+              Contributions
+            </a>
+          </li>
+          <li role="presentation" class="disabled">
+            <a href="#">
+              Surveys
+            </a>
+          </li>
+        </ul>
+
+        <br />
+
+        <div class="row">
+          <div class="col-md-12">
+            <%= yield :resources_header %>
+          </div>
+        </div>
+
+        <br />
+
+        <%= flash_messages %>
+          
+        <%= yield %>
+
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

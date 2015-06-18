@@ -1,0 +1,2 @@
+module LexicalResourcesHelper
+end

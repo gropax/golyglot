@@ -8,7 +8,16 @@
 </head>
 <body>
 
-<%= yield %>
+  <%= render "shared/header" %>
+
+  <div class="container">
+    <% if content_for? :content %>
+      <%= yield :content %>
+    <% else %>
+      <%= flash_messages %>
+      <%= yield %>
+    <% end %>
+  </div>
 
 </body>
 </html>

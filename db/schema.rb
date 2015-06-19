@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 20150618160227) do
 
   create_table "cmn_lexical_entries", force: :cascade do |t|
     t.integer  "lexicon_id"
-    t.integer  "type"
+    t.integer  "lexical_entry_type"
     t.integer  "part_of_speech"
     t.string   "simplified"
     t.string   "traditional"
     t.string   "pinyin"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "cmn_lexical_entries", ["lexicon_id"], name: "index_cmn_lexical_entries_on_lexicon_id"

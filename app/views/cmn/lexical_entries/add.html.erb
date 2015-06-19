@@ -50,9 +50,9 @@
     <th style="width: 0px;">
       <%= check_box_tag :selected %>
     </th>
-    <th>Simplified</th>
-    <th>Traditional</th>
-    <th>Pinyin</th>
+    <th>Lemma</th>
+    <th>Type</th>
+    <th>Part of Speech</th>
   </tr>
   <% for lexical_entry in @lexical_entries %>
     <tr>
@@ -61,18 +61,14 @@
       </td>
       <td>
         <%= link_to lexical_entry_path(lexical_entry) do %>
-          <%= lexical_entry.simplified %>
+          <%= cmn_lemma(lexical_entry) %>
         <% end %>
       </td>
       <td>
-        <%= link_to lexical_entry_path(lexical_entry) do %>
-          <%= lexical_entry.traditional %>
-        <% end %>
+        <span class="label label-info"><%= lexical_entry.lexical_entry_type %></span>
       </td>
       <td>
-        <%= link_to lexical_entry_path(lexical_entry) do %>
-          <%= lexical_entry.pinyin %>
-        <% end %>
+        <span class="label label-success"><%= lexical_entry.part_of_speech %></span>
       </td>
     </tr>
   <% end %>

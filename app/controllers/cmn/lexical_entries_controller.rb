@@ -84,7 +84,7 @@ class Cmn::LexicalEntriesController < ApplicationController
     end
 
     def lexical_entry_params
-      params.require(:lexical_entry).permit(:type, :part_of_speech, :simplified, :traditional, :pinyin)
+      params.require(:lexical_entry).permit(:lexical_entry_type, :part_of_speech, :simplified, :traditional, :pinyin)
         .merge(lexicon: @lexicon)
     end
 

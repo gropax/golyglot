@@ -2,7 +2,7 @@ class CreateCmnLexicalEntries < ActiveRecord::Migration
   def change
     create_table :cmn_lexical_entries do |t|
       t.belongs_to :lexicon, index: true, foreign_key: true
-      t.integer :type
+      t.integer :lexical_entry_type
       t.integer :part_of_speech
       t.string :simplified
       t.string :traditional

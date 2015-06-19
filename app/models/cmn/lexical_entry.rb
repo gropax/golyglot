@@ -21,6 +21,12 @@ class Cmn::LexicalEntry < ActiveRecord::Base
 
   validates_presence_of :lexicon
 
+  searchable do
+    text :simplified, :traditional, :pinyin
+
+    integer :lexicon_id, :lexical_entry_type, :part_of_speech
+  end
+
   def language
     Language(:cmn)
   end

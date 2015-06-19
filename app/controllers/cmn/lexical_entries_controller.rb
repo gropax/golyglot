@@ -21,7 +21,14 @@ class Cmn::LexicalEntriesController < ApplicationController
   end
 
   def search
-    #@lexical_entries = @lexicon.lexical_entries.by_language(@language).search(params[:q])
+    @query = params[:q]
+    @lexical_entries = Cmn::LexicalEntry.search {
+      fulltext params[:q]
+      with :lexicon_id, params[:lexicon_id]
+    }.results
+
+    nav :lexicon, :resources, :lexical_entries
+    render layout: 'lexicon_resources'
   end
 
   def show

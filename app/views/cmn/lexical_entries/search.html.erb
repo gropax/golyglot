@@ -1,8 +1,15 @@
-<% content_for :form_content do %>
-  <div class="col-md-7">
-    <%= form_tag search_lexicon_sentences_path(@lexicon), method: :get do %>
+<% content_for :resources_header do %>
+  <div class="col-md-4">
+    <%= link_to add_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Create
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <%= form_tag search_lexicon_lexical_entries_path(@lexicon), method: :get do %>
       <div class="input-group">
-        <%= text_field_tag :q, nil, class: 'form-control', autofocus: true %>
+        <%= text_field_tag :q, @query, class: 'form-control', autofocus: true %>
         <span class="input-group-btn">
           <%= content_tag :button, type: 'submit', class: 'btn btn-primary' do %>
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -12,27 +19,34 @@
       </div>
     <% end %>
   </div>
-
-  <div class="col-md-2">
-    <%= link_to add_lexicon_sentences_path(@lexicon, lang: @language.code), class: 'btn btn-success' do %>
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      Create
-    <% end %>
-  </div>
 <% end %>
 
 <%= flash_messages %>
 
-<table class="table">
-  <% for sentence in @sentences %>
+<table class="table table-hover">
+  <tr>
+    <th style="width: 0px;">
+      <%= check_box_tag :selected %>
+    </th>
+    <th>Lemma</th>
+    <th>Type</th>
+    <th>Part of Speech</th>
+  </tr>
+  <% for lexical_entry in @lexical_entries %>
     <tr>
       <td style="width: 0px;">
         <%= check_box_tag :selected %>
       </td>
       <td>
-        <%= link_to cmn_sentence_path(sentence) do %>
-          <%= sentence.simplified %>
+        <%= link_to lexical_entry_path(lexical_entry) do %>
+          <%= cmn_lemma(lexical_entry) %>
         <% end %>
+      </td>
+      <td>
+        <span class="label label-info"><%= lexical_entry.lexical_entry_type %></span>
+      </td>
+      <td>
+        <span class="label label-success"><%= lexical_entry.part_of_speech %></span>
       </td>
     </tr>
   <% end %>

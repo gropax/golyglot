@@ -8,12 +8,13 @@ class Cmn::LexicalEntriesController < ApplicationController
 
   def index
     @lexical_entries = @lexicon.lexical_entries
+
     nav :lexicon, :resources, :lexical_entries
     render layout: 'lexicon_resources'
   end
 
   def add
-    @lexical_entries = @lexicon.lexical_entries.recent
+    @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
     session[:lexical_entries_page] = request.env['PATH_INFO']
 
     nav :lexicon, :resources, :lexical_entries
@@ -25,6 +26,7 @@ class Cmn::LexicalEntriesController < ApplicationController
     @lexical_entries = Cmn::LexicalEntry.search {
       fulltext params[:q]
       with :lexicon_id, params[:lexicon_id]
+      paginate :page => params[:page], :per_page => 5
     }.results
 
     nav :lexicon, :resources, :lexical_entries

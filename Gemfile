@@ -51,6 +51,9 @@ end
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
+gem 'kaminari'
+
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'progress_bar'
+

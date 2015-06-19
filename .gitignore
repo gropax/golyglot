@@ -15,3 +15,8 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore embedded Solr database
+/solr/*
+!/solr/conf/*
+!/solr.xml

@@ -23,14 +23,18 @@ class Cmn::LexicalEntriesController < ApplicationController
 
   def search
     @query = params[:q]
-    @lexical_entries = Cmn::LexicalEntry.search {
-      fulltext params[:q]
-      with :lexicon_id, params[:lexicon_id]
-      paginate :page => params[:page], :per_page => 5
-    }.results
+    if @query.blank?
+      redirect_to lexicon_lexical_entries_path(@lexicon)
+    else
+      @lexical_entries = Cmn::LexicalEntry.search {
+        fulltext params[:q]
+        with :lexicon_id, params[:lexicon_id]
+        paginate :page => params[:page], :per_page => 5
+      }.results
 
-    nav :lexicon, :resources, :lexical_entries
-    render layout: 'lexicon_resources'
+      nav :lexicon, :resources, :lexical_entries
+      render layout: 'lexicon_resources'
+    end
   end
 
   def show
@@ -48,6 +52,9 @@ class Cmn::LexicalEntriesController < ApplicationController
     redirect_to add_lexicon_lexical_entries_path(@lexicon, repr: @representation)
   end
 
+  def edit_multiple
+  end
+
   def edit
     nav :lexicon, :resources
     render layout: 'lexicon'
@@ -62,6 +69,15 @@ class Cmn::LexicalEntriesController < ApplicationController
       flash.now[:error] = "Unable to update lexical entry."
       render :edit
     end
+  end
+
+  def destroy_multiple
+    lexical_entries = @lexicon.lexical_entries.where({id: params[:lexical_entry_ids]})
+    nb = lexical_entries.count
+    lexical_entries.destroy_all
+
+    flash[:success] = "Successfuly deleted #{nb} sentences."
+    redirect_to request.referer
   end
 
   def destroy

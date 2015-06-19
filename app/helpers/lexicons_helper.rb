@@ -1,6 +1,6 @@
 module LexiconsHelper
   def lexicon_path(lexicon)
-    "/" + lexicon.language.code + super
+    "/#{lexicon.language.code}/lexicons/#{lexicon.id}"
   end
 
   def lexicon_lexical_entries_path(lexicon)

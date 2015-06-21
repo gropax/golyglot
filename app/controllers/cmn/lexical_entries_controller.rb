@@ -4,9 +4,11 @@ class Cmn::LexicalEntriesController < ApplicationController
   before_action :set_lexical_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_lexicon
   before_action :set_lexical_resource_and_user
-  before_action :set_representation, only: [:create, :quick_new]
+  before_action :set_representation, only: [:quick_create, :quick_new]
 
-  def index
+ def index
+    remember_lexical_entry_collection_path!
+
     @query = params[:q]
     if @query.blank?
       # Show recently added entries
@@ -31,6 +33,7 @@ class Cmn::LexicalEntriesController < ApplicationController
 
   def new
     @lexical_entry = Cmn::LexicalEntry.new(lexicon: @lexicon)
+
     nav :lexicon, :resources
     render layout: 'lexicon'
   end
@@ -46,8 +49,9 @@ class Cmn::LexicalEntriesController < ApplicationController
   end
 
   def quick_new
+    remember_lexical_entry_collection_path!
+
     @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
-    session[:lexical_entries_page] = request.env['PATH_INFO']
 
     nav :lexicon, :resources, :lexical_entries
     render layout: 'lexicon_resources'
@@ -60,7 +64,8 @@ class Cmn::LexicalEntriesController < ApplicationController
     else
       flash.now[:error] = "Unable to create lexical_entry."
     end
-    redirect_to quick_new_lexicon_lexical_entries_path(@lexicon, repr: @representation)
+    redirect_to request.referer
+    #redirect_to quick_new_lexicon_lexical_entries_path(@lexicon, repr: @representation)
   end
 
   def edit_multiple
@@ -140,5 +145,15 @@ class Cmn::LexicalEntriesController < ApplicationController
 
     def quick_lexical_entry_params
       {@representation => params[:written_form], :lexicon => @lexicon}
+    end
+
+    def remember_lexical_entry_collection_path!
+      session[:lexical_entry_collection_path] = request.env['REQUEST_URI']
+    end
+
+    helper_method :previous_lexical_entry_collection_path
+
+    def previous_lexical_entry_collection_path
+      session[:lexical_entry_collection_path]
     end
 end

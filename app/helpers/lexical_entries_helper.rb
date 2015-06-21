@@ -11,8 +11,12 @@ module LexicalEntriesHelper
     "/" + lexical_entry.language.code + super
   end
 
-  def quick_create_lexicon_lexical_entries_path(lexicon, hsh = nil)
-    url = "#{lexicon_lexical_entries_path(lexicon)}/quick_create"
+  def new_lexicon_lexical_entries_path(lexicon, hsh = nil)
+    lexicon_lexical_entries_path(lexicon) + "/new"
+  end
+
+  def quick_new_lexicon_lexical_entries_path(lexicon, hsh = nil)
+    url = lexicon_lexical_entries_path(lexicon) + "/quick_new"
     hsh ? [url, hsh.to_query].join('?') : url
   end
 

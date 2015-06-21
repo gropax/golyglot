@@ -29,19 +29,21 @@ Rails.application.routes.draw do
   namespace :cmn do
     resources :lexicons, except: [:index, :create, :new] do
       #resource :settings
-
       resources :sentences, only: :index do
         get :search, on: :collection
         get :add, on: :collection
       end
-      resources :lexical_entries, only: [:index, :create] do
+      resources :lexical_entries, only: [:index, :new, :create] do
         collection do
-          get :quick_create
+          get :quick_new
+          post :quick_create
           multi :destroy
           multi :edit
         end
       end
     end
+
+    resources :lexical_entries, except: [:index, :new, :create]
   end
 
 end

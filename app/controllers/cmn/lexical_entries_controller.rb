@@ -4,7 +4,7 @@ class Cmn::LexicalEntriesController < ApplicationController
   before_action :set_lexical_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_lexicon
   before_action :set_lexical_resource_and_user
-  before_action :set_representation, only: [:create, :quick_create]
+  before_action :set_representation, only: [:create, :quick_new]
 
   def index
     @query = params[:q]
@@ -24,7 +24,28 @@ class Cmn::LexicalEntriesController < ApplicationController
     render layout: 'lexicon_resources'
   end
 
-  def quick_create
+  def show
+    nav :lexicon, :resources
+    render layout: 'lexicon'
+  end
+
+  def new
+    @lexical_entry = Cmn::LexicalEntry.new(lexicon: @lexicon)
+    nav :lexicon, :resources
+    render layout: 'lexicon'
+  end
+
+  def create
+    @lexical_entry = Cmn::LexicalEntry.new(lexical_entry_params)
+    if @lexical_entry.save
+      flash[:success] = "Sentence successfuly created."
+    else
+      flash.now[:error] = "Unable to create lexical_entry."
+    end
+    redirect_to lexical_entry_path @lexical_entry
+  end
+
+  def quick_new
     @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
     session[:lexical_entries_page] = request.env['PATH_INFO']
 
@@ -32,19 +53,14 @@ class Cmn::LexicalEntriesController < ApplicationController
     render layout: 'lexicon_resources'
   end
 
-  def show
-    nav :lexicon, :resources
-    render layout: 'lexicon'
-  end
-
-  def create
-    @lexical_entry = Cmn::LexicalEntry.new(create_lexical_entry_params)
+  def quick_create
+    @lexical_entry = Cmn::LexicalEntry.new(quick_lexical_entry_params)
     if @lexical_entry.save
       flash[:success] = "Sentence successfuly created."
     else
       flash.now[:error] = "Unable to create lexical_entry."
     end
-    redirect_to quick_create_lexicon_lexical_entries_path(@lexicon, repr: @representation)
+    redirect_to quick_new_lexicon_lexical_entries_path(@lexicon, repr: @representation)
   end
 
   def edit_multiple
@@ -122,7 +138,7 @@ class Cmn::LexicalEntriesController < ApplicationController
       end
     end
 
-    def create_lexical_entry_params
+    def quick_lexical_entry_params
       {@representation => params[:written_form], :lexicon => @lexicon}
     end
 end

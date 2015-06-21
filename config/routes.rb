@@ -39,6 +39,7 @@ Rails.application.routes.draw do
           post :quick_create
           multi :destroy
           multi :edit
+          put :update_multiple
         end
       end
     end

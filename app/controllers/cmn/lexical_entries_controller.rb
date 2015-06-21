@@ -65,15 +65,27 @@ class Cmn::LexicalEntriesController < ApplicationController
       flash.now[:error] = "Unable to create lexical_entry."
     end
     redirect_to request.referer
-    #redirect_to quick_new_lexicon_lexical_entries_path(@lexicon, repr: @representation)
   end
 
   def edit_multiple
+    @lexical_entries = @lexicon.lexical_entries.find(params[:lexical_entry_ids])
+    nav :lexicon, :resources
+    render layout: 'lexicon'
   end
 
   def edit
     nav :lexicon, :resources
     render layout: 'lexicon'
+  end
+
+  def update_multiple
+    @lexical_entries = @lexicon.lexical_entries.find(params[:lexical_entry_ids])
+    @lexical_entries.each do |lexical_entry|
+      lexical_entry.update_attributes!(lexical_entry_params.reject { |k,v| v.blank? })
+    end
+
+    flash[:success] = "Updated #{@lexical_entries.count} lexical entries!"
+    redirect_to quick_new_lexicon_lexical_entries_path(@lexicon)
   end
 
   def update
@@ -88,9 +100,9 @@ class Cmn::LexicalEntriesController < ApplicationController
   end
 
   def destroy_multiple
-    lexical_entries = @lexicon.lexical_entries.where({id: params[:lexical_entry_ids]})
-    nb = lexical_entries.count
-    lexical_entries.destroy_all
+    @lexical_entries = @lexicon.lexical_entries.where({id: params[:lexical_entry_ids]})
+    nb = @lexical_entries.count
+    @lexical_entries.destroy_all
 
     flash[:success] = "Successfuly deleted #{nb} sentences."
     redirect_to request.referer

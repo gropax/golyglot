@@ -32,6 +32,14 @@ module LexicalEntriesHelper
     "#{lexicon_lexical_entries_path(lexicon)}/destroy_multiple"
   end
 
+  def edit_lexicon_lexical_entries_path(lexicon)
+    "#{lexicon_lexical_entries_path(lexicon)}/edit_multiple"
+  end
+
+  def update_lexicon_lexical_entries_path(lexicon)
+    "#{lexicon_lexical_entries_path(lexicon)}/update_multiple"
+  end
+
   def collection_action_lexicon_lexical_entries_path(lexicon)
     "#{lexicon_lexical_entries_path(lexicon)}/collection_action"
   end

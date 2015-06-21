@@ -1,0 +1,31 @@
+<h1>Edit Multiple Lexical Entry</h1>
+
+<%= bootstrap_form_tag url: update_lexicon_lexical_entries_path(@lexicon), method: 'put' do |f| %>
+
+  <table class="table table-hover">
+    <% for lexical_entry in @lexical_entries %>
+        <%= hidden_field_tag "lexical_entry_ids[]", lexical_entry.id %>
+        <td>
+          <%= cmn_lemma(lexical_entry) %>
+        </td>
+        <td>
+          <span class="label label-info"><%= lexical_entry.lexical_entry_type %></span>
+        </td>
+        <td>
+          <span class="label label-success"><%= lexical_entry.part_of_speech %></span>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= f.fields_for :lexical_entry do |lex_form| %>
+    <%= lex_form.select :lexical_entry_type, options_for_select(Cmn::LexicalEntry::TYPES.to_a), {include_blank: true} %>
+    <%= lex_form.select :part_of_speech, options_for_select(Cmn::LexicalEntry::PARTS_OF_SPEECH.to_a), {include_blank: true} %>
+    <%= lex_form.text_field :simplified %>
+    <%= lex_form.text_field :traditional %>
+    <%= lex_form.text_field :pinyin %>
+  <% end %>
+
+  <%= f.submit "Update All", class: 'btn btn-success' %>
+  <%= link_to "Cancel", previous_lexical_entry_collection_path, class: 'btn btn-default' %>
+<% end %>

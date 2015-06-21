@@ -1,6 +1,11 @@
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
 // Multiple element selection and action using checkboxes in cmn/lexical_entries#add #search
 //
-$(document).ready(function() {
+function ready() {
+    console.log("Document Ready !!");
+
     refreshButtons();
 
     // Select or deselect all checkboxes whenever the top checkbox is clicked.
@@ -51,16 +56,14 @@ $(document).ready(function() {
     }
 
     $("#destroy-multiple").click(function() {
-        $('input#collection_action').val('destroy')
-        console.log($('input#collection_action').val());
+        $('input#collection_action').val('destroy');
         $('#table-form').submit();
     });
 
     $("#edit-multiple").click(function() {
-        $('input#collection_action').val('edit')
-        console.log($('input#collection_action').val());
+        $('input#collection_action').val('edit');
         $('#table-form').submit();
     });
 
-});
+}
 

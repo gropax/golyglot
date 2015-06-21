@@ -1,0 +1,37 @@
+<%= form_tag collection_action_lexicon_lexical_entries_path(lexicon), id: 'table-form' do %>
+  <%= hidden_field_tag :collection_action %>
+
+  <table class="table table-hover">
+    <tr>
+      <%= content_tag :th, style: "width: 0px;", hidden: !checkboxes do %>
+        <%= check_box_tag "select-all" %>
+      <% end %>
+      <th>Lemma</th>
+      <th>Type</th>
+      <th>Part of Speech</th>
+    </tr>
+    <% for lexical_entry in lexical_entries %>
+      <tr>
+        <%= content_tag :td, style: "width: 0px;", hidden: !checkboxes do %>
+          <%= check_box_tag "lexical_entry_ids[]", lexical_entry.id %>
+        <% end %>
+        <td>
+          <%= link_to lexical_entry_path(lexical_entry) do %>
+            <%= cmn_lemma(lexical_entry) %>
+          <% end %>
+        </td>
+        <td>
+          <span class="label label-info"><%= lexical_entry.lexical_entry_type %></span>
+        </td>
+        <td>
+          <span class="label label-success"><%= lexical_entry.part_of_speech %></span>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<div class="text-center">
+  <%= paginate lexical_entries %>
+</div>
+

@@ -36,8 +36,7 @@ Rails.application.routes.draw do
       end
       resources :lexical_entries, only: [:index, :create] do
         collection do
-          get :search
-          get :add
+          get :quick_create
           multi :destroy
           multi :edit
         end

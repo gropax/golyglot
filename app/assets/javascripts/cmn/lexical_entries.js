@@ -40,9 +40,11 @@ function ready() {
     //
     function refreshButtons() {
         if (someCheckboxChecked())
-            $('.collection-action').show();
+            //$('.collection-action').show();
+            $('.collection-action button').removeClass("disabled");
         else
-            $('.collection-action').hide();
+            //$('.collection-action').hide();
+            $('.collection-action button').addClass("disabled");
     }
 
     function someCheckboxChecked() {

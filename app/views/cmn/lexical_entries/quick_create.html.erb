@@ -1,0 +1,56 @@
+<% content_for :resources_header do %>
+  <div class="col-md-2">
+    <%= link_to import_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+      Import from CSV
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <%= form_tag lexicon_lexical_entries_path(@lexicon), method: :post do %>
+      <div class="input-group">
+        <!-- Representation Selection Button -->
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= @representation.capitalize %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <%= link_to "Simplified", quick_create_lexicon_lexical_entries_path(@lexicon, repr: 'simplified') %>
+            </li>
+            <li>
+              <%= link_to "Traditional", quick_create_lexicon_lexical_entries_path(@lexicon, repr: 'traditional') %>
+            </li>
+            <li>
+              <%= link_to "Pinyin", quick_create_lexicon_lexical_entries_path(@lexicon, repr: 'pinyin') %>
+            </li>
+          </ul>
+        </span>
+
+        <%= text_field_tag :written_form, nil, class: 'form-control', autofocus: true %>
+        <%= hidden_field_tag :repr, @representation %>
+
+        <!-- Create Button -->
+        <span class="input-group-btn">
+          <%= content_tag :button, type: 'submit', class: 'btn btn-success' do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Create
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-2">
+    <%= link_to lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      Search Mode
+    <% end %>
+  </div>
+
+<% end %>
+
+<%= flash_messages %>
+
+<%= render partial: 'list', locals: {lexicon: @lexicon, lexical_entries: @lexical_entries, checkboxes: false} %>

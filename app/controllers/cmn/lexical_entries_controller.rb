@@ -4,37 +4,32 @@ class Cmn::LexicalEntriesController < ApplicationController
   before_action :set_lexical_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_lexicon
   before_action :set_lexical_resource_and_user
-  before_action :set_representation, only: [:add, :create]
+  before_action :set_representation, only: [:create, :quick_create]
 
   def index
-    @lexical_entries = @lexicon.lexical_entries
-
-    nav :lexicon, :resources, :lexical_entries
-    render layout: 'lexicon_resources'
-  end
-
-  def add
-    @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
-    session[:lexical_entries_page] = request.env['PATH_INFO']
-
-    nav :lexicon, :resources, :lexical_entries
-    render layout: 'lexicon_resources'
-  end
-
-  def search
     @query = params[:q]
     if @query.blank?
-      redirect_to lexicon_lexical_entries_path(@lexicon)
+      # Show recently added entries
+      @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
     else
+      # Search entries
       @lexical_entries = Cmn::LexicalEntry.search {
         fulltext params[:q]
         with :lexicon_id, params[:lexicon_id]
         paginate :page => params[:page], :per_page => 5
       }.results
-
-      nav :lexicon, :resources, :lexical_entries
-      render layout: 'lexicon_resources'
     end
+
+    nav :lexicon, :resources, :lexical_entries
+    render layout: 'lexicon_resources'
+  end
+
+  def quick_create
+    @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
+    session[:lexical_entries_page] = request.env['PATH_INFO']
+
+    nav :lexicon, :resources, :lexical_entries
+    render layout: 'lexicon_resources'
   end
 
   def show
@@ -49,7 +44,7 @@ class Cmn::LexicalEntriesController < ApplicationController
     else
       flash.now[:error] = "Unable to create lexical_entry."
     end
-    redirect_to add_lexicon_lexical_entries_path(@lexicon, repr: @representation)
+    redirect_to quick_create_lexicon_lexical_entries_path(@lexicon, repr: @representation)
   end
 
   def edit_multiple

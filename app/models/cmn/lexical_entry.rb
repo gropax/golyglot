@@ -15,7 +15,9 @@ class Cmn::LexicalEntry < ActiveRecord::Base
 
   enum lexical_entry_type: TYPES
   enum part_of_speech: PARTS_OF_SPEECH
-    belongs_to :lexicon, class_name: 'Cmn::Lexicon', inverse_of: :lexical_entries
+
+  belongs_to :lexicon, class_name: 'Cmn::Lexicon', inverse_of: :lexical_entries
+  has_many :senses, class_name: 'Cmn::Sense', inverse_of: :lexical_entry
 
   scope :recent, -> { order(updated_at: :desc).limit(20) }
   scope :in, ->(lexicon) { where(lexicon: lexicon) }

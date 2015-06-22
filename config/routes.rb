@@ -44,7 +44,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :lexical_entries, except: [:index, :new, :create]
+    resources :lexical_entries, except: [:index, :new, :create] do
+      resources :senses, only: [:index, :new, :create]
+    end
+
+    resources :senses, except: [:index, :new, :create]
   end
 
 end

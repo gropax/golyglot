@@ -1,0 +1,2 @@
+module Cmn::SensesHelper
+end

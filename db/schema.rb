@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621160451) do
+ActiveRecord::Schema.define(version: 20150622123657) do
 
   create_table "cmn_lexical_entries", force: :cascade do |t|
     t.integer  "lexicon_id"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20150621160451) do
   end
 
   add_index "cmn_lexical_entries", ["lexicon_id"], name: "index_cmn_lexical_entries_on_lexicon_id"
+
+  create_table "cmn_senses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lexical_entry_selections", force: :cascade do |t|
     t.integer  "user_id"
@@ -55,6 +60,15 @@ ActiveRecord::Schema.define(version: 20150621160451) do
   end
 
   add_index "lexicons", ["lexical_resource_id"], name: "index_lexicons_on_lexical_resource_id"
+
+  create_table "senses", force: :cascade do |t|
+    t.integer  "lexical_entry_id"
+    t.string   "description"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "senses", ["lexical_entry_id"], name: "index_senses_on_lexical_entry_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

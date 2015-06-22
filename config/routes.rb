@@ -1,7 +1,3 @@
-def multi(action)
-  post :collection_action, constraints: ->(req) { req.params[:collection_action] == action.to_s }, action: "#{action}_multiple".to_sym
-end
-
 Rails.application.routes.draw do
   root :to => "home#index"
 
@@ -19,9 +15,7 @@ Rails.application.routes.draw do
 
   resources :lexical_resources, except: [:index, :create, :new] do
     resource :settings, only: [:show, :update]
-
     resources :lexicons, only: [:index, :create, :new]
-
     resources :sense_axis, only: [:index, :create, :new]
     resources :sentence_axis, only: [:index, :create, :new]
   end
@@ -35,11 +29,17 @@ Rails.application.routes.draw do
       end
       resources :lexical_entries, only: [:index, :new, :create] do
         collection do
+          get :import
           get :quick_new
           post :quick_create
-          multi :destroy
-          multi :edit
+          post :destroy_multiple
+          post :edit_multiple
           put :update_multiple
+
+          get :selection
+          post :select_multiple
+          post :deselect_multiple
+          delete :clear_selection
         end
       end
     end

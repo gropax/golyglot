@@ -4,6 +4,7 @@ class Cmn::LexicalEntriesController < ApplicationController
   before_action :set_lexical_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_lexicon
   before_action :set_lexical_resource_and_user
+  before_action :set_selection, only: [:index, :quick_new, :selection, :select_multiple, :deselect_multiple, :clear_selection]
   before_action :set_representation, only: [:quick_create, :quick_new]
 
  def index
@@ -22,19 +23,19 @@ class Cmn::LexicalEntriesController < ApplicationController
       }.results
     end
 
-    nav :lexicon, :resources, :lexical_entries
-    render layout: 'lexicon_resources'
+    nav :lexicon, :lexical_entries, :search
+    render layout: 'lexicon_lexical_entries'
   end
 
   def show
-    nav :lexicon, :resources
+    nav :lexicon, :lexical_entries
     render layout: 'lexicon'
   end
 
   def new
     @lexical_entry = Cmn::LexicalEntry.new(lexicon: @lexicon)
 
-    nav :lexicon, :resources
+    nav :lexicon, :lexical_entries
     render layout: 'lexicon'
   end
 
@@ -53,8 +54,8 @@ class Cmn::LexicalEntriesController < ApplicationController
 
     @lexical_entries = @lexicon.lexical_entries.recent.page(params[:page]).per(5)
 
-    nav :lexicon, :resources, :lexical_entries
-    render layout: 'lexicon_resources'
+    nav :lexicon, :lexical_entries, :create
+    render layout: 'lexicon_lexical_entries'
   end
 
   def quick_create
@@ -69,12 +70,12 @@ class Cmn::LexicalEntriesController < ApplicationController
 
   def edit_multiple
     @lexical_entries = @lexicon.lexical_entries.find(params[:lexical_entry_ids])
-    nav :lexicon, :resources
+    nav :lexicon, :lexical_entries
     render layout: 'lexicon'
   end
 
   def edit
-    nav :lexicon, :resources
+    nav :lexicon, :lexical_entries
     render layout: 'lexicon'
   end
 
@@ -85,7 +86,7 @@ class Cmn::LexicalEntriesController < ApplicationController
     end
 
     flash[:success] = "Updated #{@lexical_entries.count} lexical entries!"
-    redirect_to quick_new_lexicon_lexical_entries_path(@lexicon)
+    redirect_to previous_lexical_entry_collection_path
   end
 
   def update
@@ -120,6 +121,38 @@ class Cmn::LexicalEntriesController < ApplicationController
     end
   end
 
+  def selection
+    remember_lexical_entry_collection_path!
+
+    @lexical_entries = @selection.lexical_entries.page(params[:page]).per(5)
+
+    nav :lexicon, :lexical_entries, :selection
+    render layout: 'lexicon_lexical_entries'
+  end
+
+  def select_multiple
+    @lexical_entries = @lexicon.lexical_entries.find(params[:lexical_entry_ids])
+    added = @selection.add! @lexical_entries
+
+    flash[:success] = "Added #{added.count} lexical entries to selection."
+    redirect_to request.referer
+  end
+
+  def deselect_multiple
+    @lexical_entries = @lexicon.lexical_entries.find(params[:lexical_entry_ids])
+    removed = @selection.remove! @lexical_entries
+
+    flash[:success] = "Removed #{removed.count} lexical entries from selection."
+    redirect_to request.referer
+  end
+
+  def clear_selection
+    @selection.destroy
+
+    flash[:success] = "Selection cleared."
+    redirect_to request.referer
+  end
+
 
   private
 
@@ -134,6 +167,10 @@ class Cmn::LexicalEntriesController < ApplicationController
     def set_lexical_resource_and_user
       @lexical_resource = @lexicon ? @lexicon.lexical_resource : LexicalResource.find(params[:lexical_resource_id])
       @user = @lexical_resource.user
+    end
+
+    def set_selection
+      @selection = current_user.lexical_entry_selections.find_or_initialize_by(lexicon: @lexicon)
     end
 
     def lexical_entry_params

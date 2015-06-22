@@ -26,10 +26,16 @@
 
     <div class="col-md-2">
       <ul class="nav nav-pills nav-stacked">
-        <%= content_tag :li, role: 'presentation', class: (nav.resources? && 'active') do %>
+        <%= content_tag :li, role: 'presentation', class: (nav.lexical_entries? && 'active') do %>
           <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
             <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
-            Resources
+            Lexical Entries
+          <% end %>
+        <% end %>
+        <%= content_tag :li, role: 'presentation', class: (nav.sentences? && 'active') do %>
+          <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
+            <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+            Sentences
           <% end %>
         <% end %>
         <%= content_tag :li, role: 'presentation', class: 'disabled' do %>

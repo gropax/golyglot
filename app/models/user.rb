@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include BCrypt
 
+  has_many :lexical_entry_selections
   has_many :lexical_resources
 
   attr_accessor :password, :password_confirmation

@@ -57,15 +57,46 @@ function ready() {
         return false;
     }
 
+    $("#select-multiple").click(function() {
+        var url = lexicalEntriesPath() + "/select_multiple";
+        submitTableForm(url);
+    });
+
+    $("#deselect-multiple").click(function() {
+        var url = lexicalEntriesPath() + "/deselect_multiple";
+        submitTableForm(url);
+    });
+
     $("#destroy-multiple").click(function() {
-        $('input#collection_action').val('destroy');
-        $('#table-form').submit();
+        var url = lexicalEntriesPath() + "/destroy_multiple";
+        submitTableForm(url);
     });
 
     $("#edit-multiple").click(function() {
-        $('input#collection_action').val('edit');
-        $('#table-form').submit();
+        var url = lexicalEntriesPath() + "/edit_multiple";
+        submitTableForm(url);
     });
+
+    function submitTableForm(url) {
+        $('#table-form').prop('action', url);
+        $('#table-form').submit();
+    }
+
+
+    function lexicalEntriesPath() {
+        var lexicalEntriesRegexp = /.*\/[a-z]{3}\/lexicons\/\d+\/lexical_entries/;
+        var currentUrl = $(location).prop('href')
+        var match = lexicalEntriesRegexp.exec(currentUrl);
+        return match[0];
+    }
+
+
+    var lexicalEntriesRegexp = /\/[a-z]{3}\/lexicons\/(\d+)\/lexical_entries/;
+    function lexiconId() {
+        var currentUrl = $(location).prop('href')
+        var match = lexicalEntriesRegexp.exec(currentUrl);
+        return match[1];
+    }
 
 }
 

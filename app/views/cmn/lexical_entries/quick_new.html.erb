@@ -2,7 +2,7 @@
   <div class="col-md-2">
     <%= link_to import_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
       <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-      Import from CSV
+      Import Data
     <% end %>
   </div>
 
@@ -34,7 +34,7 @@
         <!-- Create Button -->
         <span class="input-group-btn">
           <%= content_tag :button, type: 'submit', class: 'btn btn-success' do %>
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
             Create
           <% end %>
         </span>
@@ -43,9 +43,9 @@
   </div>
 
   <div class="col-md-2">
-    <%= link_to lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
-      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-      Search Mode
+    <%= link_to new_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      New
     <% end %>
   </div>
 

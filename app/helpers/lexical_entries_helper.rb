@@ -43,4 +43,12 @@ module LexicalEntriesHelper
   def collection_action_lexicon_lexical_entries_path(lexicon)
     "#{lexicon_lexical_entries_path(lexicon)}/collection_action"
   end
+
+  def lexicon_lexical_entry_selection_path(lexicon)
+    "#{lexicon_lexical_entries_path(lexicon)}/selection"
+  end
+
+  def clear_lexicon_lexical_entry_selection_path(lexicon)
+    "#{lexicon_lexical_entries_path(lexicon)}/clear_selection"
+  end
 end

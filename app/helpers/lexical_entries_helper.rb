@@ -44,8 +44,9 @@ module LexicalEntriesHelper
     "#{lexicon_lexical_entries_path(lexicon)}/collection_action"
   end
 
-  def lexicon_lexical_entry_selection_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/selection"
+  def lexicon_lexical_entry_selection_path(lexicon, hsh = {})
+    url = "#{lexicon_lexical_entries_path(lexicon)}/selection"
+    hsh[:format] ? "#{url}.#{hsh[:format]}" : url
   end
 
   def clear_lexicon_lexical_entry_selection_path(lexicon)

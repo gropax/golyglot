@@ -42,6 +42,12 @@ class LexicalEntrySelection < ActiveRecord::Base
     (to_remove & selected).to_a
   end
 
+  def to_csv(options = {})
+    entries = self.lexical_entries
+    klass = entries.first.class
+    klass.to_csv(options, entries)
+  end
+
   private
 
     def remove_deleted_references!

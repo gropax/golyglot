@@ -28,6 +28,17 @@ class Cmn::LexicalEntry < ActiveRecord::Base
     integer :lexicon_id, :lexical_entry_type, :part_of_speech
   end
 
+
+  def self.to_csv(options = {}, lexical_entries = self.all)
+    CSV.generate(options) do |csv|
+      csv << column_names
+      lexical_entries.each do |lexical_entry|
+        csv << lexical_entry.attributes.values_at(*column_names)
+      end
+    end
+  end
+
+
   def language
     Language(:cmn)
   end

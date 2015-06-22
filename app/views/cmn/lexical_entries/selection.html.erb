@@ -30,10 +30,10 @@
 
     <!-- Download Button -->
     <div class="btn-group">
-      <button type="button" class="btn btn-default">
+      <%= link_to lexicon_lexical_entry_selection_path(@lexicon, format: :csv), class: "btn btn-default" do %>
         <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
         Download .csv
-      </button>
+      <% end %>
 
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="caret"></span>
@@ -41,11 +41,6 @@
       </button>
 
       <ul class="dropdown-menu">
-        <li>
-          <a id="select-multiple" href="">
-            Download .csv
-          </a>
-        </li>
         <li>
           <a id="select-multiple" href="">
             Download .xls

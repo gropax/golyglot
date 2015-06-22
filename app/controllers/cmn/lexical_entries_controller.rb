@@ -122,12 +122,17 @@ class Cmn::LexicalEntriesController < ApplicationController
   end
 
   def selection
-    remember_lexical_entry_collection_path!
+    respond_to do |format|
+      format.html do
+        remember_lexical_entry_collection_path!
+        @lexical_entries = @selection.lexical_entries.page(params[:page]).per(5)
 
-    @lexical_entries = @selection.lexical_entries.page(params[:page]).per(5)
+        nav :lexicon, :lexical_entries, :selection
+        render layout: 'lexicon_lexical_entries'
+      end
 
-    nav :lexicon, :lexical_entries, :selection
-    render layout: 'lexicon_lexical_entries'
+      format.csv { send_data @selection.to_csv }
+    end
   end
 
   def select_multiple

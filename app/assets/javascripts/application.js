@@ -14,4 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require paloma
 //= require_tree .
+
+$(document).on('page:load', function(){
+   Paloma.executeHook();
+   Paloma.engine.start();
+});

@@ -1,0 +1,23 @@
+<h1>Edit Multiple Sentences</h1>
+
+<%= bootstrap_form_tag url: update_lexicon_sentences_path(@lexicon), method: 'put' do |f| %>
+
+  <table class="table table-hover">
+    <% for sentence in @sentences %>
+        <%= hidden_field_tag "sentence_ids[]", sentence.id %>
+        <td>
+          <%= sentence.simplified %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= f.fields_for :sentence do |lex_form| %>
+    <%= lex_form.text_field :simplified %>
+    <%= lex_form.text_field :traditional %>
+    <%= lex_form.text_field :pinyin %>
+  <% end %>
+
+  <%= f.submit "Update All", class: 'btn btn-success' %>
+  <%= link_to "Cancel", previous_sentence_collection_path, class: 'btn btn-default' %>
+<% end %>

@@ -1,0 +1,56 @@
+<% content_for :resources_header do %>
+  <div class="col-md-2">
+    <%= link_to import_lexicon_sentences_path(@lexicon), class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+      Import Data
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <%= form_tag quick_create_lexicon_sentences_path(@lexicon), method: :post do %>
+      <div class="input-group">
+        <!-- Representation Selection Button -->
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= @representation.capitalize %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <%= link_to "Simplified", quick_new_lexicon_sentences_path(@lexicon, repr: 'simplified') %>
+            </li>
+            <li>
+              <%= link_to "Traditional", quick_new_lexicon_sentences_path(@lexicon, repr: 'traditional') %>
+            </li>
+            <li>
+              <%= link_to "Pinyin", quick_new_lexicon_sentences_path(@lexicon, repr: 'pinyin') %>
+            </li>
+          </ul>
+        </span>
+
+        <%= text_field_tag :written_form, nil, class: 'form-control', autofocus: true %>
+        <%= hidden_field_tag :repr, @representation %>
+
+        <!-- Create Button -->
+        <span class="input-group-btn">
+          <%= content_tag :button, type: 'submit', class: 'btn btn-success' do %>
+            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+            Create
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-2">
+    <%= link_to new_lexicon_sentences_path(@lexicon), class: 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      New
+    <% end %>
+  </div>
+
+<% end %>
+
+<%= flash_messages %>
+
+<%= render partial: 'list', locals: {lexicon: @lexicon, sentences: @sentences, checkboxes: false} %>

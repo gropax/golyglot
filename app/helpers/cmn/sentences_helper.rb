@@ -1,0 +1,2 @@
+module Cmn::SentencesHelper
+end

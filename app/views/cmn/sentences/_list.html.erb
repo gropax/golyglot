@@ -1,0 +1,29 @@
+<%= form_tag '/dynamic', id: 'table-form' do %>
+  <%= hidden_field_tag :collection_action %>
+
+  <table class="table table-hover">
+    <tr>
+      <%= content_tag :th, style: "width: 0px;", hidden: !checkboxes do %>
+        <%= check_box_tag "select-all" %>
+      <% end %>
+      <th>Sentence</th>
+    </tr>
+    <% for sentence in sentences %>
+      <tr>
+        <%= content_tag :td, style: "width: 0px;", hidden: !checkboxes do %>
+          <%= check_box_tag "sentence_ids[]", sentence.id %>
+        <% end %>
+        <td>
+          <%= link_to sentence_path(sentence) do %>
+            <%= sentence.simplified %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<div class="text-center">
+  <%= paginate sentences %>
+</div>
+

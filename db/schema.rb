@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622123657) do
+ActiveRecord::Schema.define(version: 20150622170739) do
 
   create_table "cmn_lexical_entries", force: :cascade do |t|
     t.integer  "lexicon_id"
@@ -31,16 +31,16 @@ ActiveRecord::Schema.define(version: 20150622123657) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lexical_entry_selections", force: :cascade do |t|
-    t.integer  "user_id"
+  create_table "cmn_sentences", force: :cascade do |t|
     t.integer  "lexicon_id"
-    t.text     "lexical_entry_ids"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.string   "simplified"
+    t.string   "traditional"
+    t.string   "pinyin"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "lexical_entry_selections", ["lexicon_id"], name: "index_lexical_entry_selections_on_lexicon_id"
-  add_index "lexical_entry_selections", ["user_id"], name: "index_lexical_entry_selections_on_user_id"
+  add_index "cmn_sentences", ["lexicon_id"], name: "index_cmn_sentences_on_lexicon_id"
 
   create_table "lexical_resources", force: :cascade do |t|
     t.string   "name"
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 20150622123657) do
   end
 
   add_index "lexicons", ["lexical_resource_id"], name: "index_lexicons_on_lexical_resource_id"
+
+  create_table "selections", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "lexicon_id"
+    t.text    "resource_ids"
+    t.string  "type"
+  end
+
+  add_index "selections", ["lexicon_id"], name: "index_selections_on_lexicon_id"
+  add_index "selections", ["user_id"], name: "index_selections_on_user_id"
 
   create_table "senses", force: :cascade do |t|
     t.integer  "lexical_entry_id"

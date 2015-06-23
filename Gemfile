@@ -57,3 +57,4 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'progress_bar'
 
+gem 'paloma'

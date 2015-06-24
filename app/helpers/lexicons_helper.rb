@@ -7,10 +7,6 @@ module LexiconsHelper
     lexicon_path(lexicon) + "/lexical_entries"
   end
 
-  def lexicon_sentences_path(lexicon)
-    lexicon_path(lexicon) + "/sentences"
-  end
-
   def lexicon_settings_path(lexicon)
     lexicon_path(lexicon) + "/settings"
   end

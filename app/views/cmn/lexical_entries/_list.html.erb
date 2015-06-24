@@ -9,6 +9,7 @@
       <th>Lemma</th>
       <th>Type</th>
       <th>Part of Speech</th>
+      <th>Meaning</th>
     </tr>
     <% for lexical_entry in lexical_entries %>
       <tr>
@@ -25,6 +26,13 @@
         </td>
         <td>
           <span class="label label-success"><%= lexical_entry.part_of_speech %></span>
+        </td>
+        <td>
+          <ol>
+            <% for sense in lexical_entry.senses %>
+              <li><%= sense.description %></li>
+            <% end %>
+          </ol>
         </td>
       </tr>
     <% end %>

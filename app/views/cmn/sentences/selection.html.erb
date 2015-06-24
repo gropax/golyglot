@@ -60,6 +60,33 @@
 
 <% end %>
 
+<% if @selection.action? %>
+
+  <%= form_tag @selection.action.url do %>
+    <div class="alert alert-warning" role="alert">
+      The selection is currently used to collect <%= @selection.action.message %>
+
+      <% for sentence in @sentences %>
+        <%= hidden_field_tag "sentence_ids[]", sentence.id %>
+      <% end %>
+
+      <div class="btn-group pull-right">
+        <button type="submit" class="btn btn-warning">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          Update
+        </button>
+
+        <%= link_to "Cancel", clear_lexicon_sentence_selection_path(@lexicon), method: :delete, class: "btn btn-default" %>
+      </div>
+
+    </div>
+  <% end %>
+  
+  <hr />
+<% end %>
+
+
+
 <%= flash_messages %>
 
 <% if @sentences.empty? %>

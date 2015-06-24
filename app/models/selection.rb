@@ -4,6 +4,9 @@ class Selection < ActiveRecord::Base
 
   serialize :resource_ids, Array
 
+  class Action < Struct.new(:url, :message); end
+  serialize :action, Action
+
   validates_presence_of :user
   validates_presence_of :lexicon
   validates_uniqueness_of :lexicon, scope: [:user, :type]
@@ -18,6 +21,10 @@ class Selection < ActiveRecord::Base
   def count
     remove_deleted_references!
     resource_ids.count
+  end
+
+  def set(res)
+    self.resource_ids = res.map(&:id)
   end
 
   def add!(res)
@@ -42,11 +49,17 @@ class Selection < ActiveRecord::Base
     (to_remove & selected).to_a
   end
 
+  def action?
+    !!self.action.url
+  end
+
   def to_csv(options = {})
     res = self.resources
     klass = res.first.class
     klass.to_csv(options, res)
   end
+
+
 
   private
 

@@ -1,5 +1,7 @@
 class Cmn::Sentence < ActiveRecord::Base
   belongs_to :lexicon, class_name: 'Cmn::Lexicon', inverse_of: :sentences
+  has_many :examples, class_name: 'Cmn::Example', inverse_of: :sentences
+  has_many :senses, class_name: 'Cmn::Sense', inverse_of: :sentences, through: :examples
 
   scope :recent, -> { order(updated_at: :desc).limit(20) }
   scope :in, ->(lexicon) { where(lexicon: lexicon) }

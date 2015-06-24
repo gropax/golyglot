@@ -10,4 +10,12 @@ module SensesHelper
   def edit_sense_path(sense)
     sense_path(sense) + "/edit"
   end
+
+  def edit_sense_examples_path(sense)
+    sense_path(sense) + "/edit_examples"
+  end
+
+  def sense_examples_path(sense)
+    sense_path(sense) + "/examples"
+  end
 end

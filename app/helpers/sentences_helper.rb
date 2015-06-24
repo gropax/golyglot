@@ -1,10 +1,16 @@
 module SentencesHelper
+  include LexiconsHelper
+
   def sentence_path(sentence)
     "/#{sentence.language.code}/sentences/#{sentence.id}"
   end
 
   def edit_sentence_path(sentence)
     "#{sentence_path(sentence)}/edit"
+  end
+
+  def lexicon_sentences_path(lexicon)
+    lexicon_path(lexicon) + "/sentences"
   end
 
   def sentences_path(sentence)

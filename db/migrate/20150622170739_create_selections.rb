@@ -4,6 +4,7 @@ class CreateSelections < ActiveRecord::Migration
       t.belongs_to :user, index: true, foreign_key: true
       t.belongs_to :lexicon, index: true, foreign_key: true
       t.text :resource_ids
+      t.text :action
       t.string :type
     end
   end

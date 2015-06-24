@@ -45,6 +45,17 @@
         <li class="list-group-item">
           <%= i+1 %>. <%= sense.description %>
           <%= link_to "Details", sense_path(sense), class: "btn btn-default", style: 'float: right;' %>
+
+          <ul>
+            <% for sentence in sense.sentences %>
+              <li>
+                <%= link_to sentence_path(sentence) do %>
+                  <%= sentence.simplified %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+
         </li>
       <% end %>
 

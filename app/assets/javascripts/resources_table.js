@@ -61,9 +61,13 @@ var ResourcesTable = (function($) {
     function actionHandler(action) {
         var actionUrl = baseUrl + "/" + action;
         return function() {
-            tableForm.prop('action', actionUrl);
-            tableForm.submit();
+            submit(actionUrl);
         };
+    }
+
+    function submit(actionUrl) {
+        tableForm.prop('action', actionUrl);
+        tableForm.submit();
     }
 
     function someCheckboxChecked() {

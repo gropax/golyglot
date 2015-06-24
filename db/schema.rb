@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622170739) do
+ActiveRecord::Schema.define(version: 20150623114629) do
+
+  create_table "cmn_examples", force: :cascade do |t|
+    t.integer "sense_id"
+    t.integer "sentence_id"
+  end
+
+  add_index "cmn_examples", ["sense_id"], name: "index_cmn_examples_on_sense_id"
+  add_index "cmn_examples", ["sentence_id"], name: "index_cmn_examples_on_sentence_id"
 
   create_table "cmn_lexical_entries", force: :cascade do |t|
     t.integer  "lexicon_id"
@@ -65,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150622170739) do
     t.integer "user_id"
     t.integer "lexicon_id"
     t.text    "resource_ids"
+    t.text    "action"
     t.string  "type"
   end
 

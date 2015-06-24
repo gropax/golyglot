@@ -20,51 +20,40 @@ Rails.application.routes.draw do
     resources :sentence_axis, only: [:index, :create, :new]
   end
 
+  concern :lexicon_resource do |opts|
+    collection do
+      get :import
+      get :quick_new
+      post :quick_create
+      post :destroy_multiple
+      post :edit_multiple
+      put :update_multiple
+
+      get :selection
+      scope :selection, controller: opts[:selections_controller] do
+        post :add
+        post :remove
+        post :clear
+        post :cancel_action
+      end
+    end
+  end
+
   namespace :cmn do
     resources :lexicons, except: [:index, :create, :new] do
-      #resource :settings
       resources :lexical_entries, only: [:index, :new, :create] do
-        collection do
-          get :import
-          get :quick_new
-          post :quick_create
-          post :destroy_multiple
-          post :edit_multiple
-          put :update_multiple
-
-          get :selection
-          scope :selection, controller: 'lexical_entry_selections' do
-            post :add
-            post :remove
-            post :clear
-            post :cancel_action
-          end
-        end
+        concerns :lexicon_resource, selections_controller: 'lexical_entry_selections'
       end
 
-      resources :sentences, only: [:index, :new, :create] do
-        collection do
-          get :import
-          get :quick_new
-          post :quick_create
-          post :destroy_multiple
-          post :edit_multiple
-          put :update_multiple
-
-          get :selection
-          scope :selection, controller: 'sentence_selections' do
-            post :add
-            post :remove
-            post :clear
-            post :cancel_action
-          end
-        end
+      resources :sentences do
+        concerns :lexicon_resource, selections_controller: 'sentence_selections'
       end
     end
 
     resources :lexical_entries, except: [:index, :new, :create] do
       resources :senses, only: [:index, :new, :create]
     end
+
     resources :senses, except: [:index, :new, :create] do
       get :edit_examples
       post :examples

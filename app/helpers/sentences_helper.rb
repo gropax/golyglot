@@ -52,6 +52,6 @@ module SentencesHelper
   end
 
   def clear_lexicon_sentence_selection_path(lexicon)
-    "#{lexicon_sentences_path(lexicon)}/clear_selection"
+    "#{lexicon_sentences_path(lexicon)}/selection/clear"
   end
 end

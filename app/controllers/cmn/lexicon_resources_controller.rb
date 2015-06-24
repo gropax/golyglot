@@ -147,7 +147,7 @@ class Cmn::LexiconResourcesController < ApplicationController
     end
 
     def set_resources
-      ids = params[:resource_ids] || params[:lexical_entry_ids] || []
+      ids = params[:resource_ids] || params[:lexical_entry_ids] || params[:sentence_ids] || []
       self.resources = @lexicon.send(resource_plural_name).where(id: ids)
     end
 
@@ -208,11 +208,11 @@ class Cmn::LexiconResourcesController < ApplicationController
     end
 
     def resource=(res)
-      @lexical_entry = @resource = res
+      @lexical_entry = @sentence = @resource = res
     end
 
     def resources=(res)
-      @lexical_entries = @resources = res
+      @lexical_entries = @sentences = @resources = res
     end
 
     def resource_plural_name

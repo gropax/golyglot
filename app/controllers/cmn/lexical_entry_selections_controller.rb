@@ -1,4 +1,4 @@
-class Cmn::LexicalEntrySelectionController < ApplicationController
+class Cmn::LexicalEntrySelectionsController < ApplicationController
   before_action :set_selection
   before_action :set_lexical_entries, only: [:add, :remove]
 

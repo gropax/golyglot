@@ -52,4 +52,15 @@ module LexicalEntriesHelper
   def clear_lexicon_lexical_entry_selection_path(lexicon)
     "#{lexicon_lexical_entries_path(lexicon)}/selection/clear"
   end
+
+  # Used in forms to switch between create and update routes depending on the
+  # persisted status of the record.
+  #
+  def lexical_entry_form_path(lexical_entry)
+    if lexical_entry.new_record?
+      lexicon_lexical_entries_path(lexical_entry.lexicon)
+    else
+      lexical_entry_path(lexical_entry)
+    end
+  end
 end

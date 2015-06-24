@@ -54,4 +54,15 @@ module SentencesHelper
   def clear_lexicon_sentence_selection_path(lexicon)
     "#{lexicon_sentences_path(lexicon)}/selection/clear"
   end
+
+  # Used in forms to switch between create and update routes depending on the
+  # persisted status of the record.
+  #
+  def sentence_form_path(sentence)
+    if sentence.new_record?
+      lexicon_sentences_path(sentence.lexicon)
+    else
+      sentence_path(sentence)
+    end
+  end
 end

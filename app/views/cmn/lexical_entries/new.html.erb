@@ -2,12 +2,4 @@
 
 <h1>New Lexical Entry</h1>
 
-<%= bootstrap_form_for @lexical_entry, as: :lexical_entry, url: lexicon_lexical_entries_path(@lexicon) do |f| %>
-  <%= f.select :lexical_entry_type, options_for_select(Cmn::LexicalEntry::TYPES.to_a, @lexical_entry[:lexical_entry_type]), {include_blank: true} %>
-  <%= f.select :part_of_speech, options_for_select(Cmn::LexicalEntry::PARTS_OF_SPEECH.to_a, @lexical_entry[:part_of_speech]), {include_blank: true} %>
-  <%= f.text_field :simplified %>
-  <%= f.text_field :traditional %>
-  <%= f.text_field :pinyin %>
-  <%= f.submit "Create", class: 'btn btn-success' %>
-  <%= link_to "Cancel", lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' %>
-<% end %>
+<%= render "form" %>

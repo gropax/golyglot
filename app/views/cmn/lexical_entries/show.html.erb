@@ -1,5 +1,3 @@
-<% nav :lexical_entries %>
-
 <div class="row">
   <div class="col-md-2">
     <%= link_to previous_lexical_entry_collection_path, class: "link" do %>
@@ -24,14 +22,12 @@
 
 <br />
 
+<% nav :lexical_entries %>
+
 <div class="row">
   <div class="col-md-12">
     <h1>
-      <span><%= cmn_lemma(@lexical_entry) %></span>
-      <small>
-        <span class="label label-success"><%= @lexical_entry.part_of_speech %></span>
-        <span class="label label-info"><%= @lexical_entry.lexical_entry_type %></span>
-      </small>
+      <%= render partial: "lemma", locals: {lexical_entry: @lexical_entry} %>
     </h1>
   </div>
 </div>

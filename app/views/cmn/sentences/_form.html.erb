@@ -1,0 +1,7 @@
+<%= bootstrap_form_for @sentence, as: :sentence, url: sentence_form_path(@sentence) do |f| %>
+  <%= f.text_field :simplified %>
+  <%= f.text_field :traditional %>
+  <%= f.text_field :pinyin %>
+  <%= f.submit "Submit", class: 'btn btn-success' %>
+  <%= link_to "Cancel", sentence_path(@sentence), class: 'btn btn-default' %>
+<% end %>

@@ -43,8 +43,8 @@ var ResourcesTable = (function($) {
             refreshButtons();
         });
 
-        $("#select-multiple").click(actionHandler("select_multiple"));
-        $("#deselect-multiple").click(actionHandler("deselect_multiple"));
+        $("#select-multiple").click(actionHandler("selection/add"));
+        $("#deselect-multiple").click(actionHandler("selection/remove"));
         $("#destroy-multiple").click(actionHandler("destroy_multiple"));
         $("#edit-multiple").click(actionHandler("edit_multiple"));
 

@@ -50,6 +50,6 @@ module LexicalEntriesHelper
   end
 
   def clear_lexicon_lexical_entry_selection_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/clear_selection"
+    "#{lexicon_lexical_entries_path(lexicon)}/selection/clear"
   end
 end

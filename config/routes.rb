@@ -33,9 +33,12 @@ Rails.application.routes.draw do
           put :update_multiple
 
           get :selection
-          post :select_multiple
-          post :deselect_multiple
-          delete :clear_selection
+          scope :selection, controller: 'lexical_entry_selection' do
+            post :add
+            post :remove
+            post :clear
+            post :cancel_action
+          end
         end
       end
 

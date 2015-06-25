@@ -97,6 +97,8 @@ class Cmn::LexiconResourcesController < ApplicationController
   def quick_new
     self.resources = @lexicon.send(resource_plural_name)
       .recent.page(params[:page]).per(5)
+
+    render layout: 'lexicon_resources/quick_new'
   end
 
   def quick_create
@@ -114,6 +116,8 @@ class Cmn::LexiconResourcesController < ApplicationController
       format.html {
         self.resources = @selection.send(resource_plural_name)
           .page(params[:page]).per(5)
+
+        render layout: 'lexicon_resources/selection'
       }
       format.csv { send_data @selection.to_csv }
     end

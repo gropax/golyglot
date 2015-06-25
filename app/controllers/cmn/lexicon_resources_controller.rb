@@ -28,6 +28,7 @@ class Cmn::LexiconResourcesController < ApplicationController
         paginate :page => params[:page], :per_page => 5
       }.results
     end
+    render layout: 'lexicon_resources/search'
   end
 
   def show
@@ -50,7 +51,7 @@ class Cmn::LexiconResourcesController < ApplicationController
     else
       flash.now[:error] = "Unable to create lexical_entry."
     end
-    redirect_to lexicon_resource_path(@resource, resource_singular_name)
+    redirect_to resource_path(@resource, resource_singular_name)
   end
 
   def update_multiple
@@ -66,7 +67,7 @@ class Cmn::LexiconResourcesController < ApplicationController
     @resource.update(resource_params)
     if @resource.save
       flash[:success] = "Lexical Entry successfuly updated."
-      redirect_to lexicon_resource_path(@resource, resource_singular_name)
+      redirect_to resource_path(@resource, resource_singular_name)
     else
       flash.now[:error] = "Unable to update lexical entry."
       render :edit
@@ -89,7 +90,7 @@ class Cmn::LexiconResourcesController < ApplicationController
       # Redirect to last visited lexical entry collection page
       redirect_to path
     else
-      redirect_to lexicon_resources_path(@lexicon, resource_plural_name)
+      redirect_to resources_path(@lexicon, resource_plural_name)
     end
   end
 
@@ -222,5 +223,10 @@ class Cmn::LexiconResourcesController < ApplicationController
     def resource_singular_name
       resource_plural_name.singularize
     end
+
+    def resource_type
+      resource_plural_name.to_sym
+    end
+    helper_method :resource_type
 
 end

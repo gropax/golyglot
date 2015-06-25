@@ -12,12 +12,22 @@ class ApplicationController < ActionController::Base
   end
 
   def nav(*path)
-    @nav ||= Navigation.new(path)
+    #@nav ||= Navigation.new(path)
+    if @nav
+      @nav << path
+      @nav
+    else
+      @nav = Navigation.new(path)
+    end
   end
 
   class Navigation
     def initialize(path)
       @path = path.map(&:to_sym)
+    end
+
+    def <<(path)
+      @path += path
     end
 
     def method_missing(meth, *args, &blk)

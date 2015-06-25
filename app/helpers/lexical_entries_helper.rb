@@ -50,6 +50,10 @@ module LexicalEntriesHelper
     "#{lexical_entries_path(lexicon)}/selection/clear"
   end
 
+  def cancel_action_lexical_entry_selection_path(lexicon)
+    "#{lexical_entries_path(lexicon)}/selection/cancel_action"
+  end
+
   # Used in forms to switch between create and update routes depending on the
   # persisted status of the record.
   #

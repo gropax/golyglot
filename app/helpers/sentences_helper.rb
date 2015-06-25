@@ -52,6 +52,10 @@ module SentencesHelper
     "#{sentences_path(lexicon)}/selection/clear"
   end
 
+  def cancel_action_sentence_selection_path(lexicon)
+    "#{sentences_path(lexicon)}/selection/cancel_action"
+  end
+
   # Used in forms to switch between create and update routes depending on the
   # persisted status of the record.
   #

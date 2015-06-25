@@ -17,18 +17,17 @@ class Cmn::ResourceSelectionsController < ApplicationController
   end
 
   def clear
-    @selection.destroy
+    @selection.clear!
 
     flash[:success] = "Selection cleared."
     redirect_to request.referer
   end
 
   def cancel_action
-    @selection.action = nil
-    @selection.save
+    @selection.cancel_action!
 
     flash[:success] = "Selection action cancelled."
-    redirect_to request.referer
+    redirect_to previous_resource_selection_path
   end
 
 
@@ -46,6 +45,10 @@ class Cmn::ResourceSelectionsController < ApplicationController
     end
 
     def resource_plural_name
+      raise NotImplementedError
+    end
+
+    def previous_resource_selection_path
       raise NotImplementedError
     end
 

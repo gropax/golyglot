@@ -49,8 +49,25 @@ class Selection < ActiveRecord::Base
     (to_remove & selected).to_a
   end
 
+  # If selection has a pending action, just empty the resource collection,
+  # otherwise destroy the whole selection record.
+  #
+  def clear!
+    if action?
+      self.resource_ids = []
+      save!
+    else
+      self.destroy!
+    end
+  end
+
   def action?
     !!self.action.url
+  end
+
+  def cancel_action!
+    self.action = nil
+    self.save!
   end
 
   def to_csv(options = {})

@@ -42,4 +42,8 @@ module LexiconResourcesHelper
   def clear_resource_selection_path(type, lexicon)
     send("clear_#{type.to_s.singularize}_selection_path", lexicon)
   end
+
+  def cancel_action_resource_selection_path(type, lexicon)
+    send("cancel_action_#{type.to_s.singularize}_selection_path", lexicon)
+  end
 end

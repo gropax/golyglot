@@ -5,6 +5,8 @@ class Cmn::SensesController < ApplicationController
   before_action :set_parents
   before_action :set_sentence_selection, only: [:edit_examples, :examples]
 
+  before_action :remember_sentence_selection_path, only: :edit_examples
+
   def show
     nav :lexicon, :lexical_entries
     render layout: 'lexicon'
@@ -23,7 +25,8 @@ class Cmn::SensesController < ApplicationController
   def edit_examples
     # Populate selection with sense's current sentences
     @selection.set @sense.sentences
-    # Create a new action with url and message
+
+    # @fixme Create a new action with url and message
     @selection.action.url = sense_examples_path(@sense)
     @selection.action.message = "examples for: #{@lexical_entry.simplified} #{@sense.description}"
 
@@ -32,11 +35,13 @@ class Cmn::SensesController < ApplicationController
   end
 
   def examples
-    sentences = Cmn::Sentence.find(params[:sentence_ids] || [])
+    # @fixme
+    ids = params[:sentence_ids] || params[:resource_ids] || []
+    sentences = Cmn::Sentence.find ids
+
     @sense.sentences = sentences
     if @sense.save
-      @selection.action = nil
-      @selection.save
+      @selection.cancel_action!
 
       flash[:success] = "Examples successfuly updated."
     else
@@ -65,5 +70,9 @@ class Cmn::SensesController < ApplicationController
     def sense_params
       params.require(:sense).permit(:description)
         .merge(lexical_entry: @lexical_entry)
+    end
+
+    def remember_sentence_selection_path
+      session[:sentence_selection_path] = request.referer
     end
 end

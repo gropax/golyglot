@@ -28,7 +28,7 @@ class Cmn::SensesController < ApplicationController
     @selection.action.message = "examples for: #{@lexical_entry.simplified} #{@sense.description}"
 
     @selection.save
-    redirect_to lexicon_sentence_selection_path @lexicon
+    redirect_to sentence_selection_path @lexicon
   end
 
   def examples

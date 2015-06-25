@@ -32,7 +32,7 @@
 
     <!-- Download Button -->
     <div class="btn-group">
-      <%= link_to lexicon_sentence_selection_path(@lexicon, format: :csv), class: "btn btn-default" do %>
+      <%= link_to sentence_selection_path(@lexicon, format: :csv), class: "btn btn-default" do %>
         <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
         Download .csv
       <% end %>
@@ -54,7 +54,7 @@
   </div>
 
   <div class="col-md-2">
-    <%= link_to clear_lexicon_sentence_selection_path(@lexicon), method: :post, class: "btn btn-danger" do %>
+    <%= link_to clear_sentence_selection_path(@lexicon), method: :post, class: "btn btn-danger" do %>
       <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
       Clear
     <% end %>
@@ -78,7 +78,7 @@
           Update
         </button>
 
-        <%= link_to "Cancel", clear_lexicon_sentence_selection_path(@lexicon), method: :delete, class: "btn btn-default" %>
+        <%= link_to "Cancel", clear_sentence_selection_path(@lexicon), method: :delete, class: "btn btn-default" %>
       </div>
 
     </div>

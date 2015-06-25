@@ -9,50 +9,47 @@ module SentencesHelper
     "#{sentence_path(sentence)}/edit"
   end
 
-  def lexicon_sentences_path(lexicon)
-    lexicon_path(lexicon) + "/sentences"
+  def sentences_path(lexicon)
+    lang = lexicon.language.code
+    "/#{lang}/lexicons/#{lexicon.id}/sentences"
   end
 
-  def sentences_path(sentence)
-    "/" + sentence.language.code + super
+  def new_sentences_path(lexicon, hsh = nil)
+    sentences_path(lexicon) + "/new"
   end
 
-  def new_lexicon_sentences_path(lexicon, hsh = nil)
-    lexicon_sentences_path(lexicon) + "/new"
-  end
-
-  def quick_new_lexicon_sentences_path(lexicon, hsh = nil)
-    url = lexicon_sentences_path(lexicon) + "/quick_new"
+  def quick_new_sentences_path(lexicon, hsh = nil)
+    url = sentences_path(lexicon) + "/quick_new"
     hsh ? [url, hsh.to_query].join('?') : url
   end
 
-  def quick_create_lexicon_sentences_path(lexicon, hsh = nil)
-    lexicon_sentences_path(lexicon) + "/quick_create"
+  def quick_create_sentences_path(lexicon, hsh = nil)
+    sentences_path(lexicon) + "/quick_create"
   end
 
-  def import_lexicon_sentences_path(lexicon)
-    lexicon_sentences_path(lexicon) + "/import"
+  def import_sentences_path(lexicon)
+    sentences_path(lexicon) + "/import"
   end
 
-  def destroy_lexicon_sentences_path(lexicon)
-    "#{lexicon_sentences_path(lexicon)}/destroy_multiple"
+  def destroy_sentences_path(lexicon)
+    "#{sentences_path(lexicon)}/destroy_multiple"
   end
 
-  def edit_lexicon_sentences_path(lexicon)
-    "#{lexicon_sentences_path(lexicon)}/edit_multiple"
+  def edit_sentences_path(lexicon)
+    "#{sentences_path(lexicon)}/edit_multiple"
   end
 
-  def update_lexicon_sentences_path(lexicon)
-    "#{lexicon_sentences_path(lexicon)}/update_multiple"
+  def update_sentences_path(lexicon)
+    "#{sentences_path(lexicon)}/update_multiple"
   end
 
-  def lexicon_sentence_selection_path(lexicon, hsh = {})
-    url = "#{lexicon_sentences_path(lexicon)}/selection"
+  def sentence_selection_path(lexicon, hsh = {})
+    url = "#{sentences_path(lexicon)}/selection"
     hsh[:format] ? "#{url}.#{hsh[:format]}" : url
   end
 
-  def clear_lexicon_sentence_selection_path(lexicon)
-    "#{lexicon_sentences_path(lexicon)}/selection/clear"
+  def clear_sentence_selection_path(lexicon)
+    "#{sentences_path(lexicon)}/selection/clear"
   end
 
   # Used in forms to switch between create and update routes depending on the
@@ -60,7 +57,7 @@ module SentencesHelper
   #
   def sentence_form_path(sentence)
     if sentence.new_record?
-      lexicon_sentences_path(sentence.lexicon)
+      sentences_path(sentence.lexicon)
     else
       sentence_path(sentence)
     end

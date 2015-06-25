@@ -13,7 +13,7 @@ module LexiconResourcesHelper
   def lexicon_resources_path(lexicon, type)
     case type.to_sym
     when :lexical_entries then lexical_entries_path(lexicon)
-    when :sentences then lexicon_sentences_path(lexicon)
+    when :sentences then sentences_path(lexicon)
     else
       raise TypeError, "Unknown resource type: #{type}"
     end

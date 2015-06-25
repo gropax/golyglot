@@ -33,7 +33,7 @@
           <% end %>
         <% end %>
         <%= content_tag :li, role: 'presentation', class: (nav.sentences? && 'active') do %>
-          <%= link_to lexicon_sentences_path(@lexicon) do %>
+          <%= link_to sentences_path(@lexicon) do %>
             <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
             Sentences
           <% end %>

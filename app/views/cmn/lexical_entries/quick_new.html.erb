@@ -2,14 +2,14 @@
 
 <% content_for :resources_header do %>
   <div class="col-md-2">
-    <%= link_to import_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
+    <%= link_to import_lexical_entries_path(@lexicon), class: 'btn btn-default' do %>
       <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
       Import Data
     <% end %>
   </div>
 
   <div class="col-md-8">
-    <%= form_tag quick_create_lexicon_lexical_entries_path(@lexicon), method: :post do %>
+    <%= form_tag quick_create_lexical_entries_path(@lexicon), method: :post do %>
       <div class="input-group">
         <!-- Representation Selection Button -->
         <span class="input-group-btn">
@@ -19,13 +19,13 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-right">
             <li>
-              <%= link_to "Simplified", quick_new_lexicon_lexical_entries_path(@lexicon, repr: 'simplified') %>
+              <%= link_to "Simplified", quick_new_lexical_entries_path(@lexicon, repr: 'simplified') %>
             </li>
             <li>
-              <%= link_to "Traditional", quick_new_lexicon_lexical_entries_path(@lexicon, repr: 'traditional') %>
+              <%= link_to "Traditional", quick_new_lexical_entries_path(@lexicon, repr: 'traditional') %>
             </li>
             <li>
-              <%= link_to "Pinyin", quick_new_lexicon_lexical_entries_path(@lexicon, repr: 'pinyin') %>
+              <%= link_to "Pinyin", quick_new_lexical_entries_path(@lexicon, repr: 'pinyin') %>
             </li>
           </ul>
         </span>
@@ -45,7 +45,7 @@
   </div>
 
   <div class="col-md-2">
-    <%= link_to new_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-success' do %>
+    <%= link_to new_lexical_entries_path(@lexicon), class: 'btn btn-success' do %>
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       New
     <% end %>

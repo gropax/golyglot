@@ -1,31 +1,31 @@
 <% content_for :lexicon_content do %>
   <ul class="nav nav-tabs">
     <%= content_tag :li, role: 'presentation', class: (nav.search? && 'active') do %>
-      <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
+      <%= link_to lexical_entries_path(@lexicon) do %>
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         Search
       <% end %>
     <% end %>
     <%= content_tag :li, role: 'presentation', class: (nav.create? && 'active') do %>
-      <%= link_to quick_new_lexicon_lexical_entries_path(@lexicon) do %>
+      <%= link_to quick_new_lexical_entries_path(@lexicon) do %>
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Create
       <% end %>
     <% end %>
     <%= content_tag :li, role: 'presentation', class: (nav.selection? && 'active') do %>
-      <%= link_to lexicon_lexical_entry_selection_path(@lexicon) do %>
+      <%= link_to lexical_entry_selection_path(@lexicon) do %>
         <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
         Selection <span class="badge"><%= @selection.count %></span>
       <% end %>
     <% end %>
     <%= content_tag :li, role: 'presentation', class: (nav.suggestions? && 'active' || 'disabled') do %>
-      <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
+      <%= link_to lexical_entries_path(@lexicon) do %>
         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
         Suggestions <span class="badge">0</span>
       <% end %>
     <% end %>
     <%= content_tag :li, role: 'presentation', class: (nav.synsets? && 'active' || 'disabled') do %>
-      <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
+      <%= link_to lexical_entries_path(@lexicon) do %>
         <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
         Synsets
       <% end %>

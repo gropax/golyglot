@@ -3,7 +3,7 @@ module LexiconsHelper
     "/#{lexicon.language.code}/lexicons/#{lexicon.id}"
   end
 
-  def lexicon_lexical_entries_path(lexicon)
+  def lexical_entries_path(lexicon)
     lexicon_path(lexicon) + "/lexical_entries"
   end
 
@@ -11,7 +11,7 @@ module LexiconsHelper
     lexicon_path(lexicon) + "/settings"
   end
 
-  #def search_lexicon_lexical_entries_path(lexicon)
-  #  lexicon_lexical_entries_path(lexicon) + "/search"
+  #def search_lexical_entries_path(lexicon)
+  #  lexical_entries_path(lexicon) + "/search"
   #end
 end

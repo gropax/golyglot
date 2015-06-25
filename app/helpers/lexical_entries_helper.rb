@@ -7,50 +7,47 @@ module LexicalEntriesHelper
     "#{lexical_entry_path(lexical_entry)}/edit"
   end
 
-  def lexical_entries_path(lexical_entry)
-    "/" + lexical_entry.language.code + super
+  def lexical_entries_path(lexicon)
+    lang = lexicon.language.code
+    "/#{lang}/lexicons/#{lexicon.id}/lexical_entries"
   end
 
-  def new_lexicon_lexical_entries_path(lexicon, hsh = nil)
-    lexicon_lexical_entries_path(lexicon) + "/new"
+  def new_lexical_entries_path(lexicon, hsh = nil)
+    lexical_entries_path(lexicon) + "/new"
   end
 
-  def quick_new_lexicon_lexical_entries_path(lexicon, hsh = nil)
-    url = lexicon_lexical_entries_path(lexicon) + "/quick_new"
+  def quick_new_lexical_entries_path(lexicon, hsh = nil)
+    url = lexical_entries_path(lexicon) + "/quick_new"
     hsh ? [url, hsh.to_query].join('?') : url
   end
 
-  def quick_create_lexicon_lexical_entries_path(lexicon, hsh = nil)
-    lexicon_lexical_entries_path(lexicon) + "/quick_create"
+  def quick_create_lexical_entries_path(lexicon, hsh = nil)
+    lexical_entries_path(lexicon) + "/quick_create"
   end
 
-  def import_lexicon_lexical_entries_path(lexicon)
-    lexicon_lexical_entries_path(lexicon) + "/import"
+  def import_lexical_entries_path(lexicon)
+    lexical_entries_path(lexicon) + "/import"
   end
 
-  def destroy_lexicon_lexical_entries_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/destroy_multiple"
+  def destroy_lexical_entries_path(lexicon)
+    "#{lexical_entries_path(lexicon)}/destroy_multiple"
   end
 
-  def edit_lexicon_lexical_entries_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/edit_multiple"
+  def edit_lexical_entries_path(lexicon)
+    "#{lexical_entries_path(lexicon)}/edit_multiple"
   end
 
-  def update_lexicon_lexical_entries_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/update_multiple"
+  def update_lexical_entries_path(lexicon)
+    "#{lexical_entries_path(lexicon)}/update_multiple"
   end
 
-  def collection_action_lexicon_lexical_entries_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/collection_action"
-  end
-
-  def lexicon_lexical_entry_selection_path(lexicon, hsh = {})
-    url = "#{lexicon_lexical_entries_path(lexicon)}/selection"
+  def lexical_entry_selection_path(lexicon, hsh = {})
+    url = "#{lexical_entries_path(lexicon)}/selection"
     hsh[:format] ? "#{url}.#{hsh[:format]}" : url
   end
 
-  def clear_lexicon_lexical_entry_selection_path(lexicon)
-    "#{lexicon_lexical_entries_path(lexicon)}/selection/clear"
+  def clear_lexical_entry_selection_path(lexicon)
+    "#{lexical_entries_path(lexicon)}/selection/clear"
   end
 
   # Used in forms to switch between create and update routes depending on the
@@ -58,7 +55,7 @@ module LexicalEntriesHelper
   #
   def lexical_entry_form_path(lexical_entry)
     if lexical_entry.new_record?
-      lexicon_lexical_entries_path(lexical_entry.lexicon)
+      lexical_entries_path(lexical_entry.lexicon)
     else
       lexical_entry_path(lexical_entry)
     end

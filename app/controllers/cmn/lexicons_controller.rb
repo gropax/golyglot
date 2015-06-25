@@ -3,7 +3,7 @@ class Cmn::LexiconsController < ApplicationController
   before_action :set_lexical_resource_and_user
 
   def show
-    redirect_to cmn_lexicon_lexical_entries_path(@lexicon)
+    redirect_to lexical_entries_path(@lexicon)
   end
 
   private

@@ -33,7 +33,7 @@
   </div>
 
   <div class="col-md-7">
-    <%= form_tag lexicon_lexical_entries_path(@lexicon), method: :get do %>
+    <%= form_tag lexical_entries_path(@lexicon), method: :get do %>
       <div class="input-group">
         <%= text_field_tag :q, @query, class: 'form-control', autofocus: true %>
         <span class="input-group-btn">
@@ -47,7 +47,7 @@
   </div>
 
   <div class="col-md-2">
-    <%= link_to new_lexicon_lexical_entries_path(@lexicon), class: 'btn btn-success' do %>
+    <%= link_to new_lexical_entries_path(@lexicon), class: 'btn btn-success' do %>
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       New
     <% end %>

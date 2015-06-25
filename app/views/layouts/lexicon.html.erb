@@ -27,7 +27,7 @@
     <div class="col-md-2">
       <ul class="nav nav-pills nav-stacked">
         <%= content_tag :li, role: 'presentation', class: (nav.lexical_entries? && 'active') do %>
-          <%= link_to lexicon_lexical_entries_path(@lexicon) do %>
+          <%= link_to lexical_entries_path(@lexicon) do %>
             <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
             Lexical Entries
           <% end %>

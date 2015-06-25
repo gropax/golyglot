@@ -9,7 +9,7 @@ class LexiconsController < ApplicationController
   end
 
   def show
-    redirect_to lexicon_lexical_entries_path(@lexicon)
+    redirect_to lexical_entries_path(@lexicon)
   end
 
   def new

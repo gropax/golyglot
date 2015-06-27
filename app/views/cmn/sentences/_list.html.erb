@@ -7,6 +7,8 @@
         <%= check_box_tag "select-all" %>
       <% end %>
       <th>Sentence</th>
+      <th>Pronunciation</th>
+      <th>Translation</th>
     </tr>
     <% for sentence in sentences %>
       <tr>
@@ -17,6 +19,14 @@
           <%= link_to sentence_path(sentence) do %>
             <%= sentence.simplified %>
           <% end %>
+        </td>
+        <td>
+          <%= link_to sentence_path(sentence) do %>
+            <%= sentence.pinyin %>
+          <% end %>
+        </td>
+        <td>
+          <%= sentence.translation %>
         </td>
       </tr>
     <% end %>

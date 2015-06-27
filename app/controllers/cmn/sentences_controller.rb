@@ -10,7 +10,7 @@ class Cmn::SentencesController < Cmn::LexiconResourcesController
     end
 
     def resource_params
-      params.require(:sentence).permit(:simplified, :traditional, :pinyin)
+      params.require(:sentence).permit(:simplified, :traditional, :pinyin, :translation)
         .merge(lexicon: @lexicon)
     end
 

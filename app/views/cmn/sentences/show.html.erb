@@ -26,8 +26,11 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h1>
-      <span><%= @sentence.simplified %></span>
-    </h1>
+    <h3>
+      <%= @sentence.simplified %>
+     【<%= @sentence.traditional %>】 
+    </h3>
+    <h4><%= @sentence.pinyin %></h4>
+    <h4><%= @sentence.translation %></h4>
   </div>
 </div>

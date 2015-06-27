@@ -2,6 +2,7 @@
   <%= f.text_field :simplified %>
   <%= f.text_field :traditional %>
   <%= f.text_field :pinyin %>
+  <%= f.text_field :translation %>
   <%= f.submit "Submit", class: 'btn btn-success' %>
   <%= link_to "Cancel", sentence_path(@sentence), class: 'btn btn-default' %>
 <% end %>

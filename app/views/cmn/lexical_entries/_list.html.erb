@@ -28,11 +28,15 @@
           <span class="label label-success"><%= lexical_entry.part_of_speech %></span>
         </td>
         <td>
-          <ol>
-            <% for sense in lexical_entry.senses %>
-              <li><%= sense.description %></li>
-            <% end %>
-          </ol>
+          <% if lexical_entry.senses.empty? %>
+            <%= lexical_entry.translation %>
+          <% else %>
+            <ol>
+              <% for sense in lexical_entry.senses %>
+                <li><%= sense.description %></li>
+              <% end %>
+            </ol>
+          <% end %>
         </td>
       </tr>
     <% end %>

@@ -7,6 +7,7 @@ class CreateCmnLexicalEntries < ActiveRecord::Migration
       t.string :simplified
       t.string :traditional
       t.string :pinyin
+      t.string :translation
 
       t.timestamps null: false
     end

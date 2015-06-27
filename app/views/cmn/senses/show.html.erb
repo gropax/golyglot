@@ -24,43 +24,42 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h1>
-      <span><%= cmn_lemma(@lexical_entry) %></span>
-      <small>
-        <span class="label label-success"><%= @lexical_entry.part_of_speech %></span>
-        <span class="label label-info"><%= @lexical_entry.lexical_entry_type %></span>
-      </small>
-    </h1>
     <h3>
-      <%= @sense.description %>
+      <%= render partial: "cmn/lexical_entries/lemma", locals: {lexical_entry: @lexical_entry} %>
     </h3>
+    <h4>
+      <%= @sense.description %>
+    </h4>
   </div>
 </div>
 
-<hr />
+<br />
 
 <div class="row">
   <div class="col-md-12">
-    <h3>
+    <h5>
       Examples
       <%= link_to edit_sense_examples_path(@sense), class: 'btn btn-default', style: "float: right;" do %>
         <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
         Select Sentences
       <% end %>
-    </h3>
+    </h5>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
+    <% for sentence in @sense.sentences %>
 
-    <ol class="list-group">
-      <% for sentence in @sense.sentences %>
-        <li class="list-group-item">
-          <%= sentence.simplified %>
-        </li>
-      <% end %>
-    </ol>
+      <div class="row">
+        <div class="col-md-12">
+          <%= link_to sentence_path(sentence) do %>
+            <%= sentence.simplified %>
+            <%= sentence.translation %>
+          <% end %>
+        </div>
+      </div>
 
+    <% end %>
   </div>
 </div>

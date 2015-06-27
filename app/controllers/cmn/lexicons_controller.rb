@@ -1,4 +1,6 @@
 class Cmn::LexiconsController < ApplicationController
+  include LexicalEntriesHelper
+
   before_action :set_lexicon, except: [:index, :new, :create]
   before_action :set_lexical_resource_and_user
 

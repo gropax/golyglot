@@ -26,20 +26,21 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h1>
+    <h3>
       <%= render partial: "lemma", locals: {lexical_entry: @lexical_entry} %>
-    </h1>
+    </h3>
   </div>
 </div>
 
-<hr />
+<br />
 
 <div class="row">
   <div class="col-md-12">
 
-    <ol class="list-group">
-      <% @lexical_entry.senses.each_with_index do |sense, i| %>
-        <li class="list-group-item">
+    <% @lexical_entry.senses.each_with_index do |sense, i| %>
+      <div class="row">
+        <div class="col-md-12">
+
           <%= i+1 %>. <%= sense.description %>
           <%= link_to "Details", sense_path(sense), class: "btn btn-default", style: 'float: right;' %>
 
@@ -48,16 +49,21 @@
               <li>
                 <%= link_to sentence_path(sentence) do %>
                   <%= sentence.simplified %>
+                  <%= sentence.translation %>
                 <% end %>
               </li>
             <% end %>
           </ul>
 
-        </li>
-      <% end %>
+        </div>
+      </div>
+    <% end %>
 
-      <!-- New Sense Form -->
-      <li class="list-group-item">
+    <br />
+
+    <!-- New Sense Form -->
+    <div class="row">
+      <div class="col-md-12">
         <%= form_for :sense, url: lexical_entry_senses_path(@lexical_entry), as: :sense, method: :post, class: 'form-inline' do |f| %>
           <div class="input-group">
             <%= f.text_field :description, class: 'form-control', autofocus: true %>
@@ -70,8 +76,8 @@
             </span>
           </div>
         <% end %>
-      </li>
-    </ol>
+      </div>
+    </div>
 
   </div>
 </div>

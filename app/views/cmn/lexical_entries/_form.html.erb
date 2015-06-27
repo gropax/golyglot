@@ -4,6 +4,7 @@
   <%= f.text_field :simplified %>
   <%= f.text_field :traditional %>
   <%= f.text_field :pinyin %>
+  <%= f.text_field :translation %>
   <%= f.submit "Submit", class: 'btn btn-success' %>
   <%= link_to "Cancel", lexical_entry_path(@lexical_entry), class: 'btn btn-default' %>
 <% end %>

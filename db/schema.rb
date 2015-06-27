@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150623114629) do
     t.string   "simplified"
     t.string   "traditional"
     t.string   "pinyin"
+    t.string   "translation"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150623114629) do
     t.string   "simplified"
     t.string   "traditional"
     t.string   "pinyin"
+    t.string   "translation"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
